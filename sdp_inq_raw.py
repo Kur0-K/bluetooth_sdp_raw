@@ -40,7 +40,8 @@ def sdp_inq_raw():
         print(e)
         sock.close()
         exit(1)
-    
+    sock.close()
+
     # Check number of devices
     if ret[8] == 0x00:
         print("No devices found")
@@ -53,7 +54,6 @@ def sdp_inq_raw():
     for device_num in range(0, ret[8]):
         payload = inq_res[device_num * 14:(device_num +1) * 14]
         print("BD Addr {:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}".format(payload[5], payload[4], payload[3], payload[2], payload[1], payload[0]))
-    sock.close()
 
 if __name__ == "__main__":
     sdp_inq_raw()
